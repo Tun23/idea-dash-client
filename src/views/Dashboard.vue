@@ -105,11 +105,11 @@
 </template>
 <script>
 // Charts
-import { ordersChart } from '@/components/Charts/Chart'
+import { ordersChart } from '@/components/Charts/Chart.js'
 import Chart from 'chart.js'
 
-import PageVisitsTable from './Dashboard/PageVisitsTable'
-import SocialTrafficTable from './Dashboard/SocialTrafficTable'
+import PageVisitsTable from './Dashboard/PageVisitsTable.vue'
+import SocialTrafficTable from './Dashboard/SocialTrafficTable.vue'
 let chart
 
 export default {

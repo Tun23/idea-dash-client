@@ -1,0 +1,14 @@
+version: '3.2'
+
+services:
+  vite-client:
+    container_name: vite-client
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    environment:
+      - PORT=5555
+      - API_URL=http://localhost:5055
+    restart: 'unless-stopped'
+    ports:
+      - '5555:5555'
