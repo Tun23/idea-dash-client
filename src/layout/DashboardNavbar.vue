@@ -7,36 +7,24 @@
     </form>
     <ul class="navbar-nav align-items-center d-none d-md-flex">
       <li class="nav-item dropdown">
-        <base-dropdown class="nav-link pr-0">
+        <base-dropdown class="nav-link pr-0" position="right" :hideArrow="false">
           <template v-slot:title>
-            <div class="media align-items-center mr-7" role="button">
+            <div class="media align-items-center" role="button">
               <span class="avatar avatar-sm rounded-circle">
                 <img alt="Image placeholder" src="/img/theme/team-4-800x800.jpg" />
               </span>
-              <div class="media-body ml-2 d-none d-lg-block">
+              <!-- <div class="media-body ml-2 d-none d-lg-block">
                 <span class="mb-0 text-sm font-weight-bold">User</span>
-              </div>
+              </div> -->
             </div>
           </template>
           <div class="dropdown-header noti-title">
             <h6 class="text-overflow m-0">Welcome!</h6>
           </div>
-          <router-link to="/profile" class="dropdown-item">
+          <a role="button" class="dropdown-item">
             <i class="ni ni-single-02"></i>
-            <span>My profile</span>
-          </router-link>
-          <router-link to="/profile" class="dropdown-item">
-            <i class="ni ni-settings-gear-65"></i>
-            <span>Settings</span>
-          </router-link>
-          <router-link to="/profile" class="dropdown-item">
-            <i class="ni ni-calendar-grid-58"></i>
-            <span>Activity</span>
-          </router-link>
-          <router-link to="/profile" class="dropdown-item">
-            <i class="ni ni-support-16"></i>
-            <span>Support</span>
-          </router-link>
+            <span>{{ user?.user_name }}</span>
+          </a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item cursor-pointer pe-auto" role="button" @click="logout">
             <i class="ni ni-user-run"></i>

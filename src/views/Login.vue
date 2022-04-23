@@ -3,14 +3,14 @@
     <div class="col-lg-5 col-md-7">
       <div class="card bg-secondary shadow border-0">
         <div class="card-header bg-transparent pb-3">
-          <div class="text-muted text-center mt-2 mb-3">
-            <h4>Sign in with credentials</h4>
+          <div class="text-muted text-center mt-2 mb-0">
+            <h1>Sign in</h1>
           </div>
         </div>
         <div class="card-body px-lg-5 py-lg-5">
-          <validate-form class="text-start" @submit="onSubmit">
+          <validate-form class="text-start" @submit="onSubmit"  v-slot="{ meta }">
             <base-input
-              rules="required|email"
+              rules="required|isEmailOrAdmin"
               name="email"
               formClasses="input-group-alternative"
               placeholder="Email"
@@ -21,23 +21,20 @@
             <base-input
               formClasses="input-group-alternative"
               placeholder="Password"
-              rules="required"
+              rules="required|min:6"
               name="password"
               type="password"
               addon-left-icon="ni ni-lock-circle-open"
             >
             </base-input>
             <div class="text-center">
-              <button type="submit" class="btn btn-primary my-4">Sign in</button>
+              <button type="submit" class="btn btn-primary my-4" :disabled="!meta.valid">Sign in</button>
             </div>
           </validate-form>
         </div>
       </div>
       <div class="row mt-3">
-        <div class="col-6">
-          <a href="#" class="text-light"><small>Forgot password?</small></a>
-        </div>
-        <div class="col-6 text-right">
+        <div class="offset-6 col-6 text-right">
           <router-link to="/register" class="text-light"><small>Create new account</small></router-link>
         </div>
       </div>
