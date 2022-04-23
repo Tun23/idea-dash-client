@@ -18,6 +18,13 @@
         />
         <sidebar-item
           :link="{
+            name: 'Category',
+            icon: 'ni ni-book-bookmark text-blue',
+            path: '/category',
+          }"
+        />
+        <sidebar-item
+          :link="{
             name: 'Icons',
             icon: 'ni ni-planet text-blue',
             path: '/icons',
