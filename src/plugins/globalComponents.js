@@ -11,6 +11,9 @@ import BaseProgress from '@/components/BaseProgress.vue'
 import BaseSwitch from '@/components/BaseSwitch.vue'
 import BaseRadio from '@/components/BaseRadio.vue'
 import BaseTable from '@/components/BaseTable.vue'
+import BaseDatePicker from '@/components/BaseDatePicker.vue'
+import BaseFile from '@/components/BaseFile.vue'
+import BaseEditor from '@/components/BaseEditor.vue'
 import Card from '@/components/Card.vue'
 import Modal from '@/components/Modal.vue'
 import StatsCard from '@/components/StatsCard.vue'
@@ -34,6 +37,9 @@ const GlobalComponents = {
     app.component('base-switch', BaseSwitch)
     app.component('base-radio', BaseRadio)
     app.component('base-table', BaseTable)
+    app.component(BaseDatePicker.name, BaseDatePicker)
+    app.component(BaseFile.name, BaseFile)
+    app.component(BaseEditor.name, BaseEditor)
     app.component('card', Card)
     app.component('modal', Modal)
     app.component('stats-card', StatsCard)

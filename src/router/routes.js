@@ -3,6 +3,9 @@ import Icons from '../views/Icons.vue'
 import IndexDepartment from '../views/department/Index.vue'
 import CreateDepartment from '../views/department/Create.vue'
 import EditDepartment from '../views/department/Edit.vue'
+import IndexCategory from '../views/category/Index.vue'
+import EditCategory from '../views/category/Edit.vue'
+import CreateCategory from '../views/category/Create.vue'
 import Maps from '../views/Maps.vue'
 import Profile from '../views/UserProfile.vue'
 import Tables from '../views/Tables.vue'
@@ -43,6 +46,30 @@ export default [
     path: '/department/edit/:id',
     name: 'Edit department',
     components: { default: EditDepartment },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/category',
+    name: 'category',
+    components: { default: IndexCategory },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/category/create',
+    name: 'New category',
+    components: { default: CreateCategory },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/category/edit/:id',
+    name: 'Edit category',
+    components: { default: EditCategory },
     meta: {
       requiresAuth: true,
     },
