@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group">
+  <div class="form-group" :class="formGroupClasses">
     <div
       class="mb-0"
       :class="[
@@ -34,6 +34,7 @@
           :placeholder="placeholder"
           :rules="rules"
           @input="handleInput"
+          @keyup.enter="handleEnter"
           v-on="listeners"
           class="form-control border-0"
           :class="[{ 'is-valid': valid === true }, { 'is-invalid': valid === false }, inputClasses]"
@@ -81,6 +82,10 @@ export default {
       description: 'Input error (below input)',
     },
     formClasses: {
+      type: String,
+      description: 'Form css classes',
+    },
+    formGroupClasses: {
       type: String,
       description: 'Form css classes',
     },
@@ -142,6 +147,9 @@ export default {
   methods: {
     handleInput(e) {
       this.$emit('update:value', e.target.value)
+    },
+    handleEnter() {
+      this.$emit('keyup-enter')
     },
     onFocus(value) {
       this.focused = true
