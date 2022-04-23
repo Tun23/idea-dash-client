@@ -43,8 +43,8 @@
 <script>
 import { h } from 'vue'
 
-import PillsLayout from './PillsLayout'
-import TabsLayout from './TabsLayout'
+import PillsLayout from './PillsLayout.vue'
+import TabsLayout from './TabsLayout.vue'
 export default {
   name: 'tabs',
   components: {

@@ -31,7 +31,7 @@
               <a class="nav-link" href="#" role="button">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="img/theme/team-1-800x800.jpg" />
+                    <img alt="Image placeholder" src="/img/theme/team-1-800x800.jpg" />
                   </span>
                 </div>
               </a>
@@ -103,7 +103,7 @@
   </nav>
 </template>
 <script>
-import NavbarToggleButton from '@/components/NavbarToggleButton'
+import NavbarToggleButton from '@/components/NavbarToggleButton.vue'
 
 export default {
   name: 'sidebar',

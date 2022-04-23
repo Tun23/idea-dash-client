@@ -2,7 +2,7 @@
   <div>
     <base-header
       class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-      style="min-height: 600px; background-image: url(img/theme/profile-cover.jpg); background-size: cover; background-position: center top"
+      style="min-height: 600px; background-image: url(/img/theme/profile-cover.jpg); background-size: cover; background-position: center top"
     >
       <!-- Mask -->
       <span class="mask opacity-8 bg-gradient-light"></span>
@@ -28,7 +28,7 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="img/theme/team-4-800x800.jpg" class="rounded-circle" />
+                    <img src="/img/theme/team-4-800x800.jpg" class="rounded-circle" />
                   </a>
                 </div>
               </div>
