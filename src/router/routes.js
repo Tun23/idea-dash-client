@@ -1,5 +1,8 @@
 import Dashboard from '../views/Dashboard.vue'
 import Icons from '../views/Icons.vue'
+import IndexDepartment from '../views/department/Index.vue'
+import CreateDepartment from '../views/department/Create.vue'
+import EditDepartment from '../views/department/Edit.vue'
 import Maps from '../views/Maps.vue'
 import Profile from '../views/UserProfile.vue'
 import Tables from '../views/Tables.vue'
@@ -16,6 +19,30 @@ export default [
     path: '/dashboard',
     name: 'dashboard',
     components: { default: Dashboard },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/department',
+    name: 'department',
+    components: { default: IndexDepartment },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/department/create',
+    name: 'New department',
+    components: { default: CreateDepartment },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/department/edit/:id',
+    name: 'Edit department',
+    components: { default: EditDepartment },
     meta: {
       requiresAuth: true,
     },

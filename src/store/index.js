@@ -8,7 +8,7 @@ export default createStore({
     user: null,
     isLoading: false,
     notification: null,
-    limit: 5,
+    limit:5,
     page: 1,
   },
   mutations: {

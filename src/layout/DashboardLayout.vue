@@ -9,7 +9,13 @@
             path: '/dashboard',
           }"
         />
-
+        <sidebar-item
+          :link="{
+            name: 'Department',
+            icon: 'ni ni-badge text-blue',
+            path: '/department',
+          }"
+        />
         <sidebar-item
           :link="{
             name: 'Icons',

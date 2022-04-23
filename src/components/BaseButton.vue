@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" :type="tag === 'button' ? nativeType : ''" @click="handleClick" class="btn" :class="classes">
+  <component :is="tag" :type="tag === 'button' ? nativeType : ''" class="btn" :class="classes">
     <span class="btn-inner--icon" v-if="$slots.icon || (icon && $slots.default)">
       <slot name="icon">
         <i :class="icon"></i>
@@ -91,11 +91,7 @@ export default {
       return btnClasses
     },
   },
-  methods: {
-    handleClick(evt) {
-      this.$emit('click', evt)
-    },
-  },
+  methods: {},
 }
 </script>
 <style></style>

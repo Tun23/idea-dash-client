@@ -9,7 +9,7 @@
         to="/"
         style="justify-content: center; text-align: center; font-size: 3.2rem; font-weight: bold; color: #5e72e4"
       >
-        <img :src="logo" class="navbar-brand-img mr-2 mb-2" alt="..." />IDash
+        <img :src="logo" class="navbar-brand-img mr-2 mb-2" alt="logo" />IDash
       </router-link>
 
       <slot name="mobile-right">
@@ -113,7 +113,7 @@ export default {
   props: {
     logo: {
       type: String,
-      default: 'img/brand/logo.png',
+      default: '/img/brand/logo.png',
       description: 'Sidebar app logo',
     },
     autoClose: {
