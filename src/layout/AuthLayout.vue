@@ -72,13 +72,13 @@
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
               &copy; {{ year }}
-              <a href="#" class="font-weight-bold ml-1" target="_blank">Idea Dash</a>
+              <a href="#" class="font-weight-bold ml-1" target="_blank">IDash</a>
             </div>
           </div>
           <div class="col-xl-6">
             <ul class="nav nav-footer justify-content-center justify-content-xl-end">
               <li class="nav-item">
-                <a href="#" class="nav-link" target="_blank">Idea Dash</a>
+                <a href="#" class="nav-link" target="_blank">IDash</a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link" target="_blank">About Us</a>
