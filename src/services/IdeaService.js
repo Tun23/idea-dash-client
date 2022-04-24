@@ -12,7 +12,7 @@ export default {
     query.push(`limit=${store.state.limit || 10}`)
     query.push(`page=${store.state.page || 1}`)
     if (param.rand) query.push(`rand=${param.rand}`)
-    if (param.topicId) query.push(`topicId=${param.topicId}`)
+    if (param.categoryId) query.push(`categoryId=${param.categoryId}`)
     if (param.keyword) query.push(`keyword=${param.keyword}`)
     const res = await axios.get(`/api/v1/idea/search?${query.join('&')}`)
     return res.data

@@ -1,3 +1,4 @@
+import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Icons from '../views/Icons.vue'
 import IndexDepartment from '../views/department/Index.vue'
@@ -15,8 +16,16 @@ import Register from '../views/Register.vue'
 export default [
   {
     path: '/',
-    name: 'root',
-    redirect: '/dashboard',
+    name: '/',
+    redirect: '/home',
+  },
+  {
+    path: '/home',
+    name: 'home',
+    components: { default: Home },
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/dashboard',

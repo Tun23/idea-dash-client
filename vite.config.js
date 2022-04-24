@@ -12,6 +12,10 @@ export default ({ mode }) => {
           replacement: '$1',
         },
         { find: '@', replacement: path.resolve(__dirname, './src') },
+        {
+          find: '@SwiperBundle',
+          replacement: path.resolve(__dirname, './node_modules/swiper/swiper-bundle.css'),
+        },
       ],
     },
     server: { port: process.env.VITE_PORT },
