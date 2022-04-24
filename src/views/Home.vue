@@ -82,7 +82,7 @@
       ></span>
     </div>
   </div>
-  <idea-modal :idea="currentIdea" :show="isOpenModal" @close="isOpenModal = false"></idea-modal>
+  <idea-modal :id="currentIdea.id" :show="isOpenModal" @close="isOpenModal = false"></idea-modal>
   <NewIdeaModal :show="isOpenModalNewIdea" @close="isOpenModalNewIdea = false"></NewIdeaModal>
 </template>
 <script>
