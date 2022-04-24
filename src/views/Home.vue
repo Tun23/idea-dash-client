@@ -2,7 +2,7 @@
   <div>
     <base-header type="gradient-primary" class="px-5 pb-6 pb-8 pt-5 pt-md-8 overflow-hidden">
       <div class="js-carousel-review">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper" :style="{ zIndex: '0' }">
           <div class="swiper-slide" v-for="item in categories" :key="item.id">
             <div class="card">
               <div class="card-body py-3">
