@@ -7,15 +7,10 @@
         <div class="col">
           <div class="card shadow">
             <div class="card-header bg-transparent">
-              <h3 class="mb-0">List catergory</h3>
+              <h3 class="mb-0">List idea</h3>
             </div>
             <div class="card-body">
               <div class="btn-toolbar d-flex align-items-start justify-content-between" role="toolbar">
-                <div class="btn-group mb-3" role="group">
-                  <router-link to="/category/create">
-                    <base-button type="default" class="float-right align-middle"> <i class="fa fa-plus"></i> Add</base-button>
-                  </router-link>
-                </div>
                 <div class="input-group">
                   <base-input
                     name="search"
@@ -34,38 +29,36 @@
                   :class="''"
                   :thead-classes="'thead-light'"
                   tbody-classes="list"
-                  :data="topics"
+                  :data="ideas"
                 >
                   <template v-slot:columns>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Close Date</th>
-                    <th>Final Close Date</th>
+                    <th>Like</th>
+                    <th>Unlike</th>
+                    <th>Comment</th>
                     <th class="align-middle text-center">Actions</th>
                   </template>
 
                   <template v-slot:default="row">
                     <th scope="row">
                       <div class="media align-items-center">
-                        {{ row.item.name }}
+                        {{ row.item.title }}
                       </div>
                     </th>
                     <td class="text-truncate" style="max-width: 150px">
                       {{ removeTags(row.item.description) }}
                     </td>
                     <td>
-                      {{ convertTime(row.item.lock_date) }}
+                      <div class="text-center text-black"><i class="fa fa-thumbs-up mr-2" aria-hidden="true"></i>{{ row.item.downVoteCount }}</div>
                     </td>
                     <td>
-                      {{ convertTime(row.item.close_date) }}
+                      <div class="text-center text-black"><i class="fa fa-thumbs-down mr-2" aria-hidden="true"></i>{{ row.item.downVoteCount }}</div>
+                    </td>
+                    <td>
+                      <div class="text-center text-black"><i class="fa fa-comments mr-2" aria-hidden="true"></i>{{ row.item.commentCount }}</div>
                     </td>
                     <td class="align-middle text-center">
-                      <router-link :to="`/category/${row.item.id}/ideas`">
-                        <base-button size="sm" type="success" class="mr-4"><i class="fa fa-eye"></i> Ideas</base-button>
-                      </router-link>
-                      <router-link :to="`/category/edit/${row.item.id}`">
-                        <base-button size="sm" type="info" class="mr-4"> <i class="fa fa-pencil"></i> Edit</base-button>
-                      </router-link>
                       <base-button size="sm" type="warning" class="mr-4" @click="onDelete(row.item)"> <i class="fa fa-trash"></i> Delete</base-button>
                     </td>
                   </template>
@@ -90,48 +83,48 @@
     </modal>
   </div>
 </template>
+
 <script>
 import { defineComponent } from 'vue'
 import moment from 'moment-timezone'
-import CategoryService from '@/services/CategoryService.js'
+import IdeaService from '@/services/IdeaService.js'
 moment().tz('Asia/Ho_Chi_Minh').format()
 export default defineComponent({
-  name: 'ListCategory',
+  name: 'ListIdea',
   components: {},
   data() {
-    return { topics: [], lastPage: 1, isOpenModal: false, currentData: { id: '', name: '' }, keyword: null }
+    return { ideas: [], lastPage: 1, isOpenModal: false, currentData: { id: '', name: '' }, keyword: null }
   },
   async mounted() {
-    await this.search()
+    await this.search({ categoryId: this.categoryId })
   },
   computed: {
     currentPage() {
       return this.$store.state.page
     },
-    perPage() {
-      return this.$store.state.limit
+    paginationItems() {
+      return this.paginate(this.currentPage, this.lastPage, 1)
+    },
+    categoryId() {
+      return this.$route.params.id
     },
   },
   methods: {
     convertTime(time) {
       return moment(time).format('DD/MM/YYYY, HH:mm:ss')
     },
-
     async changePage(number) {
       if (number <= 0 || number > this.lastPage) return
       this.$store.dispatch('setPage', number)
-      await this.search()
+      await this.search({ topicId: this.topicId })
     },
-    async search(keyword = null) {
+    async search(param) {
       this.$store.dispatch('startLoading')
       try {
-        const res = await CategoryService.search(this.$axios, this.$store, keyword)
+        const res = await IdeaService.search(this.$axios, this.$store, param)
         if (res.success) {
           const { data, lastPage } = res.data
-          this.topics = data.map((item) => {
-            item.closed = moment() > moment(item.close_date)
-            return item
-          })
+          this.ideas = data
           this.lastPage = lastPage
         } else throw res
       } catch (err) {
@@ -147,7 +140,7 @@ export default defineComponent({
     async submitDelete() {
       this.$store.dispatch('startLoading')
       try {
-        const res = await CategoryService.deleteOne(this.$axios, this.currentData.id)
+        const res = await IdeaService.deleteOne(this.$axios, this.currentData.id)
         if (res.success) {
           await this.search()
         }
@@ -170,4 +163,3 @@ export default defineComponent({
   },
 })
 </script>
-

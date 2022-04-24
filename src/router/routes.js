@@ -4,6 +4,7 @@ import Icons from '../views/Icons.vue'
 import IndexDepartment from '../views/department/Index.vue'
 import CreateDepartment from '../views/department/Create.vue'
 import EditDepartment from '../views/department/Edit.vue'
+import IndexIdea from '../views/idea/Index.vue'
 import IndexCategory from '../views/category/Index.vue'
 import EditCategory from '../views/category/Edit.vue'
 import CreateCategory from '../views/category/Create.vue'
@@ -32,6 +33,14 @@ export default [
     path: '/category/:id',
     name: 'category detail',
     components: { default: CategoryDetail },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/category/:id/ideas',
+    name: 'category list idea',
+    components: { default: IndexIdea },
     meta: {
       requiresAuth: true,
     },
