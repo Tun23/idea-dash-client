@@ -7,6 +7,7 @@ import EditDepartment from '../views/department/Edit.vue'
 import IndexCategory from '../views/category/Index.vue'
 import EditCategory from '../views/category/Edit.vue'
 import CreateCategory from '../views/category/Create.vue'
+import CategoryDetail from '../views/CategoryDetail.vue'
 import Maps from '../views/Maps.vue'
 import Profile from '../views/UserProfile.vue'
 import Tables from '../views/Tables.vue'
@@ -23,6 +24,14 @@ export default [
     path: '/home',
     name: 'home',
     components: { default: Home },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/category/:id',
+    name: 'category detail',
+    components: { default: CategoryDetail },
     meta: {
       requiresAuth: true,
     },
