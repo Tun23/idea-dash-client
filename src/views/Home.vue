@@ -31,6 +31,9 @@
                   <p class="mt-3 mb-0 pl-3 text-sm">
                     <span class="text-nowrap"><span class="text-warning mr-2">Close at: </span>{{ convertTime(item.close_date) }}</span>
                   </p>
+                  <router-link :to="`/category/${item.id}`" class="btn btn-primary btn-sm text-center ml-3 mt-3 mb-0 pl-2 text-sm text-white">
+                    View More<i class="fa fa-arrow-right ml-1" aria-hidden="true"></i>
+                  </router-link>
                 </div>
               </div>
             </div>
