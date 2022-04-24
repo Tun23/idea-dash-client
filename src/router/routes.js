@@ -16,7 +16,7 @@ import Register from '../views/Register.vue'
 export default [
   {
     path: '/',
-    name: '/',
+    name: 'root',
     redirect: '/home',
   },
   {
