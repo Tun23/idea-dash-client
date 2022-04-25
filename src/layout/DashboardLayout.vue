@@ -11,9 +11,9 @@
         />
         <sidebar-item
           :link="{
-            name: 'Dashboard',
-            icon: 'ni ni-tv-2 text-primary',
-            path: '/dashboard',
+            name: 'Report',
+            icon: 'ni ni-chart-pie-35 text-primary',
+            path: '/report',
           }"
         />
         <sidebar-item

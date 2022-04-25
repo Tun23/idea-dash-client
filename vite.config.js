@@ -16,6 +16,10 @@ export default ({ mode }) => {
           find: '@SwiperBundle',
           replacement: path.resolve(__dirname, './node_modules/swiper/swiper-bundle.css'),
         },
+        {
+          find: 'viteChart',
+          replacement: path.resolve(__dirname, './node_modules/chart.js'),
+        },
       ],
     },
     server: { port: process.env.VITE_PORT },

@@ -1,5 +1,5 @@
 import Home from '../views/Home.vue'
-import Dashboard from '../views/Dashboard.vue'
+// import Dashboard from '../views/Dashboard.vue'
 import Icons from '../views/Icons.vue'
 import IndexDepartment from '../views/department/Index.vue'
 import CreateDepartment from '../views/department/Create.vue'
@@ -12,6 +12,7 @@ import IndexCategory from '../views/category/Index.vue'
 import EditCategory from '../views/category/Edit.vue'
 import CreateCategory from '../views/category/Create.vue'
 import CategoryDetail from '../views/CategoryDetail.vue'
+import Report from '../views/Report.vue'
 import Maps from '../views/Maps.vue'
 import Profile from '../views/UserProfile.vue'
 import Tables from '../views/Tables.vue'
@@ -48,14 +49,14 @@ export default [
       requiresAuth: true,
     },
   },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    components: { default: Dashboard },
-    meta: {
-      requiresAuth: true,
-    },
-  },
+  // {
+  //   path: '/dashboard',
+  //   name: 'dashboard',
+  //   components: { default: Dashboard },
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
   {
     path: '/department',
     name: 'department',
@@ -124,6 +125,14 @@ export default [
     path: '/category/edit/:id',
     name: 'Edit category',
     components: { default: EditCategory },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/report',
+    name: 'report',
+    components: { default: Report },
     meta: {
       requiresAuth: true,
     },
