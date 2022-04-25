@@ -76,7 +76,7 @@
                   </div>
                   <base-select
                     class="col-sm-9"
-                    v-model:values="currentData.department_id"
+                    v-model:value="currentData.department_id"
                     :values="departments"
                     name="department_id"
                     :classes="'form-select'"
@@ -89,20 +89,7 @@
                   </div>
                   <base-select
                     class="col-sm-9"
-                    v-model:values="currentData.role"
-                    :values="roles"
-                    name="role"
-                    :classes="'form-select'"
-                    rules="required"
-                  ></base-select>
-                </div>
-                <div class="row gx-0 align-items-center justify-content-between">
-                  <div class="col-sm-2 mb-sm-3">
-                    <label class="float-sm-end">Role <span class="text-danger">*</span></label>
-                  </div>
-                  <base-select
-                    class="col-sm-9"
-                    v-model:values="currentData.role"
+                    v-model:value="currentData.role"
                     :values="roles"
                     name="role"
                     :classes="'form-select'"

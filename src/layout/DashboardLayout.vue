@@ -18,16 +18,23 @@
         />
         <sidebar-item
           :link="{
-            name: 'Department',
-            icon: 'ni ni-badge text-blue',
-            path: '/department',
+            name: 'Category',
+            icon: 'ni ni-book-bookmark text-blue',
+            path: '/category',
           }"
         />
         <sidebar-item
           :link="{
-            name: 'Category',
-            icon: 'ni ni-book-bookmark text-blue',
-            path: '/category',
+            name: 'User',
+            icon: 'fa fa-users text-blue',
+            path: '/user',
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Department',
+            icon: 'ni ni-badge text-blue',
+            path: '/department',
           }"
         />
       </template>

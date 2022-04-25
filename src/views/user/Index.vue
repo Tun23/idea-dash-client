@@ -12,7 +12,7 @@
             <div class="card-body">
               <div class="btn-toolbar d-flex align-items-start justify-content-between" role="toolbar">
                 <div class="btn-group mb-3" role="group">
-                  <router-link to="/department/create">
+                  <router-link to="/user/create">
                     <base-button type="default" class="float-right align-middle"> <i class="fa fa-plus"></i> Add</base-button>
                   </router-link>
                 </div>
@@ -62,7 +62,7 @@
                     </th>
                     <th scope="row">
                       <div class="media align-items-center">
-                        {{ item.role === 1 ? 'Admin' : item.role === 2 ? 'QA' : 'Normal' }}
+                        {{ row.item.role === 1 ? 'Admin' : row.item.role === 2 ? 'QA' : 'Normal' }}
                       </div>
                     </th>
                     <td class="align-middle text-center">
