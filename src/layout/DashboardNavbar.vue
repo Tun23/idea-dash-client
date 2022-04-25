@@ -11,11 +11,15 @@
           <template v-slot:title>
             <div class="media align-items-center" role="button">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="/img/theme/team-4-800x800.jpg" />
+                <img
+                  alt="Image placeholder"
+                  :src="
+                    user?.image?.source_url
+                      ? user?.image?.source_url
+                      : 'https://idea-dash.s3.ap-southeast-1.amazonaws.com/files/4eaf9a0c-f899-471d-97b0-c773f97f5cbd.png'
+                  "
+                />
               </span>
-              <!-- <div class="media-body ml-2 d-none d-lg-block">
-                <span class="mb-0 text-sm font-weight-bold">User</span>
-              </div> -->
             </div>
           </template>
           <div class="dropdown-header noti-title">
