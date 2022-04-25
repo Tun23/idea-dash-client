@@ -4,6 +4,9 @@ import Icons from '../views/Icons.vue'
 import IndexDepartment from '../views/department/Index.vue'
 import CreateDepartment from '../views/department/Create.vue'
 import EditDepartment from '../views/department/Edit.vue'
+import IndexUser from '../views/user/Index.vue'
+import CreateUser from '../views/user/Create.vue'
+import EditUser from '../views/user/Edit.vue'
 import IndexIdea from '../views/idea/Index.vue'
 import IndexCategory from '../views/category/Index.vue'
 import EditCategory from '../views/category/Edit.vue'
@@ -73,6 +76,30 @@ export default [
     path: '/department/edit/:id',
     name: 'Edit department',
     components: { default: EditDepartment },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/user',
+    name: 'user',
+    components: { default: IndexUser },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/user/create',
+    name: 'New user',
+    components: { default: CreateUser },
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/user/edit/:id',
+    name: 'Edit user',
+    components: { default: EditUser },
     meta: {
       requiresAuth: true,
     },
