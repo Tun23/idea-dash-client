@@ -7,6 +7,16 @@ export default {
     const res = await axios.get('/api/v1/category')
     return res.data
   },
+  async downloadZip(axios, id) {
+    const axiosOptions = {
+      responseType: 'arraybuffer',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    const res = await axios.get(`/api/v1/category/${id}/download`, axiosOptions)
+    return res.data
+  },
   async search(axios, store, keyword) {
     const query = []
     query.push(`limit=${store.state.limit || 10}`)
