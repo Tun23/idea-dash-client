@@ -45,7 +45,7 @@
     <div class="container-fluid mt--7">
       <div class="row">
         <div class="col-lg-4 mb-4" v-for="item in ideas" :key="item.id">
-          <div class="card">
+          <div class="card h-100">
             <div class="card-img-top">
               <div
                 class="page-header border-radius-xl card-img-top"
@@ -79,10 +79,20 @@
             </div>
           </div>
         </div>
+        <div class="col-lg-4 mb-4">
+          <div class="border card h-100 card-plain">
+            <div class="text-center card-body d-flex flex-column justify-content-center">
+              <a href="javascript:;" @click="isOpenModalNewIdea = true">
+                <i class="mb-3 fa fa-plus text-gray"></i>
+                <h3 class="text-gray">New idea</h3>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <span class="text-center d-block justify-content-center" v-if="nextPage"
-        ><p role="button" @click="loadMore(nextPage)"><i class="ni ni-bold-down ml-3 text-xl" aria-hidden="true"></i></p
-      ></span>
+      <div class="card-footer d-flex justify-content-center bg-transparent">
+        <base-pagination :pageCount="lastPage" :perPage="perPage" :value="currentPage" @input="changePage" align="center"></base-pagination>
+      </div>
     </div>
   </div>
   <idea-modal :id="currentIdea.id" :show="isOpenModal" @close="isOpenModal = false"></idea-modal>
@@ -113,14 +123,27 @@ export default defineComponent({
       categories: [],
       ideas: [],
       currentIdea: {},
+      total: 0,
     }
   },
   async mounted() {
     this.$store.dispatch('setPage', this.page)
-    this.$store.dispatch('setLimit', 6)
     await this.init()
   },
+  computed: {
+    currentPage() {
+      return this.$store.state.page
+    },
+    perPage() {
+      return this.$store.state.limit
+    },
+  },
   methods: {
+    async changePage(number) {
+      if (number <= 0 || number > this.lastPage) return
+      this.$store.dispatch('setPage', number)
+      await this.search({}, true)
+    },
     async init() {
       this.$store.dispatch('startLoading')
       try {
@@ -171,8 +194,9 @@ export default defineComponent({
       try {
         const res = await IdeaService.search(this.$axios, this.$store, param)
         if (res.success) {
-          const { data, page, nextPage, lastPage } = res.data
+          const { data, page, nextPage, lastPage, total } = res.data
           this.ideas = forceUpdate ? data : this.ideas.concat(data)
+          this.total = total
           this.page = page
           this.nextPage = nextPage
           this.lastPage = lastPage

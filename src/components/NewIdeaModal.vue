@@ -35,7 +35,6 @@
               class="col-md-8 mb-0"
               name="document_id"
               aria-label="Image"
-              rules="required|document"
               :accept="'.xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf'"
             />
           </div>
