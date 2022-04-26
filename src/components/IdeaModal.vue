@@ -92,7 +92,7 @@
                   />
                 </div>
                 <div class="comment-data-block mx-3">
-                  <h3 class="mb-1">{{ comment.creator.user_name }}</h3>
+                  <h3 class="mb-1">{{ comment?.is_incognito ? 'Anonymous' : comment.creator.user_name }}</h3>
                   <p class="mb-0">{{ comment.comment }}</p>
                   <div class="d-flex flex-wrap align-items-center comment-activity text-sm">
                     <span> {{ convertTime(comment.created_at) }} </span>
@@ -104,16 +104,22 @@
           <span class="text-center d-block" v-else
             ><p><i class="fa fa-comments-o" aria-hidden="true"></i> Comment to this post</p></span
           >
-          <validate-form class="comment-text d-flex align-items-center mt-3" @submit="(data) => postComment(data, idea?.id)">
+          <validate-form class="comment-text d-flex align-items-center mt-3 row" v-slot="{ meta }" @submit="(data) => postComment(data, idea?.id)">
             <base-input
-              formGroupClasses="w-100 rounded-5 mb-0 "
+              formGroupClasses="w-100 rounded-5 mb-0 col-md-8"
               type="text"
               name="comment"
               formClasses="border border-1 input-group-alternative rounded"
               placeholder="Enter Your Comment"
+              rules="required"
             />
-            <div class="comment-attagement d-flex d-block mx-3">
-              <button type="submit" class="border-0 bg-transparent text-black-50"><i class="ni ni-curved-next" aria-hidden="true"></i></button>
+            <div class="bg-soft-primary rounded pointer col-md-2 py-1">
+              <base-checkbox name="is_incognito"> <span> Anonymous </span></base-checkbox>
+            </div>
+            <div class="comment-attagement d-flex d-block col-md-2 py-1">
+              <button type="submit" class="border-0 bg-transparent text-black-50" :disabled="!meta.valid">
+                <i class="ni ni-curved-next" aria-hidden="true"></i>
+              </button>
             </div>
           </validate-form>
         </div>
@@ -152,6 +158,7 @@ export default {
     async postComment(formData, id) {
       this.$store.dispatch('startLoading')
       try {
+        formData.is_incognito = Number(formData.is_incognito)
         const res = await CommentService.createOne(this.$axios, { ...formData, idea_id: id })
         if (res.success) {
           this.idea.comments.unshift(res.data)
