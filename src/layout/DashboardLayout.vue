@@ -9,34 +9,38 @@
             path: '/home',
           }"
         />
-        <sidebar-item
-          :link="{
-            name: 'Report',
-            icon: 'ni ni-chart-pie-35 text-primary',
-            path: '/report',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Category',
-            icon: 'ni ni-book-bookmark text-blue',
-            path: '/category',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'User',
-            icon: 'fa fa-users text-blue',
-            path: '/user',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Department',
-            icon: 'ni ni-badge text-blue',
-            path: '/department',
-          }"
-        />
+        <template v-if="user?.role !== 3">
+          <sidebar-item
+            :link="{
+              name: 'Category',
+              icon: 'ni ni-book-bookmark text-blue',
+              path: '/category',
+            }"
+          />
+          <template v-if="user?.role === 1 || user?.role === 9">
+            <sidebar-item
+              :link="{
+                name: 'Report',
+                icon: 'ni ni-chart-pie-35 text-primary',
+                path: '/report',
+              }"
+            />
+            <sidebar-item
+              :link="{
+                name: 'User',
+                icon: 'fa fa-users text-blue',
+                path: '/user',
+              }"
+            />
+            <sidebar-item
+              :link="{
+                name: 'Department',
+                icon: 'ni ni-badge text-blue',
+                path: '/department',
+              }"
+            />
+          </template>
+        </template>
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
@@ -62,6 +66,11 @@ export default {
     return {
       sidebarBackground: 'vue', //vue|blue|orange|green|red|primary
     }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
+    },
   },
   methods: {
     toggleSidebar() {

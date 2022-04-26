@@ -1,6 +1,4 @@
 import Home from '../views/Home.vue'
-// import Dashboard from '../views/Dashboard.vue'
-import Icons from '../views/Icons.vue'
 import IndexDepartment from '../views/department/Index.vue'
 import CreateDepartment from '../views/department/Create.vue'
 import EditDepartment from '../views/department/Edit.vue'
@@ -13,9 +11,6 @@ import EditCategory from '../views/category/Edit.vue'
 import CreateCategory from '../views/category/Create.vue'
 import CategoryDetail from '../views/CategoryDetail.vue'
 import Report from '../views/Report.vue'
-import Maps from '../views/Maps.vue'
-import Profile from '../views/UserProfile.vue'
-import Tables from '../views/Tables.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 
@@ -49,20 +44,13 @@ export default [
       requiresAuth: true,
     },
   },
-  // {
-  //   path: '/dashboard',
-  //   name: 'dashboard',
-  //   components: { default: Dashboard },
-  //   meta: {
-  //     requiresAuth: true,
-  //   },
-  // },
   {
     path: '/department',
     name: 'department',
     components: { default: IndexDepartment },
     meta: {
       requiresAuth: true,
+      isAdmin: true,
     },
   },
   {
@@ -71,6 +59,7 @@ export default [
     components: { default: CreateDepartment },
     meta: {
       requiresAuth: true,
+      isAdmin: true,
     },
   },
   {
@@ -79,6 +68,7 @@ export default [
     components: { default: EditDepartment },
     meta: {
       requiresAuth: true,
+      isAdmin: true,
     },
   },
   {
@@ -87,6 +77,7 @@ export default [
     components: { default: IndexUser },
     meta: {
       requiresAuth: true,
+      isAdmin: true,
     },
   },
   {
@@ -95,6 +86,7 @@ export default [
     components: { default: CreateUser },
     meta: {
       requiresAuth: true,
+      isAdmin: true,
     },
   },
   {
@@ -103,6 +95,7 @@ export default [
     components: { default: EditUser },
     meta: {
       requiresAuth: true,
+      isAdmin: true,
     },
   },
   {
@@ -111,6 +104,7 @@ export default [
     components: { default: IndexCategory },
     meta: {
       requiresAuth: true,
+      isQa: true,
     },
   },
   {
@@ -119,6 +113,7 @@ export default [
     components: { default: CreateCategory },
     meta: {
       requiresAuth: true,
+      isQa: true,
     },
   },
   {
@@ -127,6 +122,7 @@ export default [
     components: { default: EditCategory },
     meta: {
       requiresAuth: true,
+      isQa: true,
     },
   },
   {
@@ -135,33 +131,8 @@ export default [
     components: { default: Report },
     meta: {
       requiresAuth: true,
+      isAdmin: true,
     },
-  },
-  {
-    path: '/icons',
-    name: 'icons',
-    components: { default: Icons },
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/maps',
-    name: 'maps',
-    components: { default: Maps },
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    components: { default: Profile },
-  },
-  {
-    path: '/tables',
-    name: 'tables',
-    components: { default: Tables },
   },
   {
     path: '/login',
