@@ -61,12 +61,31 @@
                     </td>
                     <td class="align-middle text-center">
                       <router-link :to="`/category/${row.item.id}/ideas`">
-                        <base-button size="sm" type="success" class="mr-4"><i class="fa fa-eye"></i> Ideas</base-button>
+                        <base-button size="sm" type="success" class="mr-4"><i class="fa fa-eye"></i>View Ideas</base-button>
                       </router-link>
-                      <router-link :to="`/category/edit/${row.item.id}`">
-                        <base-button size="sm" type="info" class="mr-4"> <i class="fa fa-pencil"></i> Edit</base-button>
-                      </router-link>
-                      <base-button size="sm" type="warning" class="mr-4" @click="onDelete(row.item)"> <i class="fa fa-trash"></i> Delete</base-button>
+                      <base-dropdown class="nav-link pr-0" position="right" :hideArrow="false">
+                        <template v-slot:title>
+                          <base-button size="sm" type="primary" class="mr-4"> <i class="fa fa-ellipsis-v"></i> More</base-button>
+                        </template>
+                        <template v-if="row.item.closed">
+                          <a class="dropdown-item" role="button" @click="downloadZip(row.item.id)">
+                            <i class="fa fa-file-archive-o"></i>
+                            <span>Download Zip</span>
+                          </a>
+                          <div class="dropdown-divider"></div>
+                        </template>
+                        <router-link :to="`/category/edit/${row.item.id}`">
+                          <a class="dropdown-item" role="button">
+                            <i class="fa fa-pencil"></i>
+                            <span>Edit</span>
+                          </a>
+                        </router-link>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" role="button" @click="onDelete(row.item)">
+                          <i class="fa fa-trash"></i>
+                          <span>Delete</span>
+                        </a>
+                      </base-dropdown>
                     </td>
                   </template>
                 </base-table>
@@ -92,6 +111,7 @@
 </template>
 <script>
 import { defineComponent } from 'vue'
+import FileSaver from 'file-saver'
 import moment from 'moment-timezone'
 import CategoryService from '@/services/CategoryService.js'
 moment().tz('Asia/Ho_Chi_Minh').format()
@@ -113,10 +133,15 @@ export default defineComponent({
     },
   },
   methods: {
+    async downloadZip(id) {
+      this.$store.dispatch('startLoading')
+      const res = await CategoryService.downloadZip(this.$axios, id)
+      FileSaver.saveAs(new Blob([res], { type: 'application/zip' }), `category${Date.now()}.zip`)
+      this.$store.dispatch('stopLoading')
+    },
     convertTime(time) {
       return moment(time).format('DD/MM/YYYY, HH:mm:ss')
     },
-
     async changePage(number) {
       if (number <= 0 || number > this.lastPage) return
       this.$store.dispatch('setPage', number)

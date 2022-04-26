@@ -1,15 +1,14 @@
 export default {
-  bind: function (el, binding, vnode) {
-    el.clickOutsideEvent = function (event) {
-      // here I check that click was outside the el and his childrens
-      if (!(el == event.target || el.contains(event.target))) {
-        // and if it did, call method provided in attribute value
-        vnode.context[binding.expression](event)
+  beforeMount: function (el, binding) {
+    const ourClickEventHandler = (event) => {
+      if (!el.contains(event.target) && el !== event.target) {
+        binding.value(event)
       }
     }
-    document.body.addEventListener('click', el.clickOutsideEvent)
+    el.__vueClickEventHandler__ = ourClickEventHandler
+    document.addEventListener('click', ourClickEventHandler)
   },
-  unbind: function (el) {
-    document.body.removeEventListener('click', el.clickOutsideEvent)
+  unmounted: function (el) {
+    document.removeEventListener('click', el.__vueClickEventHandler__)
   },
 }
