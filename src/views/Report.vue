@@ -31,36 +31,81 @@
         <div class="col-xl-4">
           <department-chart :data="{ labels: chartDepLabels, data: chartDepData }"></department-chart>
         </div>
+        <div class="col-xl-8 mb-5 mt-3 mb-xl-0">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Top 10 highest view idea</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <base-table class="table align-items-center table-flush" :thead-classes="'thead-light'" tbody-classes="list" :data="topView">
+                  <template v-slot:columns>
+                    <th>Title</th>
+                    <th>Total view</th>
+                    <th class="align-middle text-center">Actions</th>
+                  </template>
+
+                  <template v-slot:default="row">
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        {{ row.item.title }}
+                      </div>
+                    </th>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        {{ row.item.total_view }}
+                      </div>
+                    </th>
+                    <td class="align-middle text-center">
+                      <base-button size="sm" type="success" @click="viewIdea(row.item)"><i class="fa fa-eye"></i>View</base-button>
+                    </td>
+                  </template>
+                </base-table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <idea-modal :id="currentIdea.id" :show="isOpenModal" @close="isOpenModal = false"></idea-modal>
 </template>
 <script>
 import ReportService from '@/services/ReportService.js'
 import DepartmentChart from '@/components/Charts/DepartmentChart.vue'
 import IdeaChart from '@/components/Charts/IdeaChart.vue'
+import IdeaModal from '@/components/IdeaModal.vue'
 export default {
   name: 'report',
   components: {
     DepartmentChart,
     IdeaChart,
+    IdeaModal,
   },
   data() {
     return {
+      isOpenModal: false,
       overView: {},
       chartDepLabels: [],
       chartDepData: [],
       chartLinedata: {},
+      topView: [],
+      currentIdea: {},
     }
   },
   async mounted() {
-    await this.getOverView()
+    await this.init()
   },
   methods: {
-    async getOverView() {
+    viewIdea(idea) {
+      this.currentIdea = idea
+      this.isOpenModal = true
+    },
+    async init() {
       this.$store.dispatch('startLoading')
       try {
         const res = await ReportService.getOverView(this.$axios)
+        const resTop = await ReportService.getTopIdeaView(this.$axios)
         if (res.success) {
           this.overView = res.data
           this.chartLinedata = res.data.chartIdeaByDate
@@ -71,7 +116,9 @@ export default {
             return item.count
           })
         }
-        if (res.message) this.$store.dispatch('handleNotifications', res)
+        if (resTop.success) {
+          this.topView = resTop.data
+        }
       } catch (err) {
         this.$store.dispatch('handleNotifications', { message: err.response.data })
       } finally {
