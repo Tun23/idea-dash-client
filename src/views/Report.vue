@@ -31,7 +31,7 @@
         <div class="col-xl-4">
           <department-chart :data="{ labels: chartDepLabels, data: chartDepData }"></department-chart>
         </div>
-        <div class="col-xl-8 mb-5 mt-3 mb-xl-0">
+        <div class="col-xl-6 mb-5 mt-3 mb-xl-0">
           <div class="card shadow">
             <div class="card-header bg-transparent">
               <h3 class="mb-0">Top 10 highest view idea</h3>
@@ -54,6 +54,40 @@
                     <th scope="row">
                       <div class="media align-items-center">
                         {{ row.item.total_view }}
+                      </div>
+                    </th>
+                    <td class="align-middle text-center">
+                      <base-button size="sm" type="success" @click="viewIdea(row.item)"><i class="fa fa-eye"></i>View</base-button>
+                    </td>
+                  </template>
+                </base-table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 mb-5 mt-3 mb-xl-0">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Top 10 highest popular idea</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <base-table class="table align-items-center table-flush" :thead-classes="'thead-light'" tbody-classes="list" :data="topPopular">
+                  <template v-slot:columns>
+                    <th>Title</th>
+                    <th>Score</th>
+                    <th class="align-middle text-center">Actions</th>
+                  </template>
+
+                  <template v-slot:default="row">
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        {{ row.item.title }}
+                      </div>
+                    </th>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        {{ row.item.score }}
                       </div>
                     </th>
                     <td class="align-middle text-center">
@@ -90,6 +124,7 @@ export default {
       chartDepData: [],
       chartLinedata: {},
       topView: [],
+      topPopular: [],
       currentIdea: {},
     }
   },
@@ -117,7 +152,9 @@ export default {
           })
         }
         if (resTop.success) {
-          this.topView = resTop.data
+          const { topView, topPopular } = resTop.data
+          this.topView = topView
+          this.topPopular = topPopular
         }
       } catch (err) {
         this.$store.dispatch('handleNotifications', { message: err.response.data })

@@ -4,7 +4,7 @@ export default {
     return res.data
   },
   async getTopIdeaView(axios) {
-    const res = await axios.get(`/api/v1/report/top-view`)
+    const res = await axios.get(`/api/v1/report/top`)
     return res.data
   },
 }
