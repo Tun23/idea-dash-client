@@ -158,7 +158,7 @@ export default {
     async postComment(formData, id) {
       this.$store.dispatch('startLoading')
       try {
-        formData.is_incognito = Number(formData.is_incognito)
+        formData.is_incognito = Number(formData.is_incognito) || 0
         const res = await CommentService.createOne(this.$axios, { ...formData, idea_id: id })
         if (res.success) {
           this.idea.comments.unshift(res.data)
